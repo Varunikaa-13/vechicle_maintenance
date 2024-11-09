@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color:black;
+          background-image:url(as.jpg);
+          background-size: cover;
+          display:flex;
+          background-position: center;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          box-sizing:content-box;
+          padding: 10px 30px;
+          position: relative;
+        }
+        h1{
+            text-align: center;
+            color:navajowhite
+
+        }
+    
+        form {
+         background-image: url(assth.jpg);
+          border: 2px solid rgba(203, 243, 161, 0.2);
+          padding: 40px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(220, 15, 15, 0.1);
+        display: block;
+        width:30%;
+        position: relative;
+       
+
+        }
+    
+        
+    
+        input {
+          width: 85%;
+          height:80%;
+         position: relative;
+          margin-bottom: 30px;
+          box-sizing :50px;
+          margin-top: 10px;
+          border-radius: 50px;
+         
+        color:black;
+          margin-right: 20px;
+          font-size: 18px;
+          padding: 15px 35px 20px 20px;
+          outline: 0;
+          text-decoration-color:white;
+          
+          
+          
+        
+        }
+        placeholder{
+          color:black;
+        }
+        i{
+           right:80px;
+            position: absolute;
+         color:chocolate;
+          align-items: center;
+          margin-top: 35px;
+            
+        }
+        
+       
+    
+        button {
+          background-color:darkslategrey;;
+          color:white;
+          font-weight: 100%;
+          font-size: 18px;
+          padding: 10px 60px;
+          border: none;
+          border-radius: 20px;
+          cursor: pointer;
+         
+        }
+    
+        button:hover {
+          background-color:chocolate;
+        }
+    
+        .error-message {
+          color: #ff0000;
+          margin-top: -10px;
+          margin-bottom: 10px;
+        }
+      </style>
+</head>
+<script src="https://kit.fontawesome.com/f948ae81c3.js" crossorigin="anonymous"></script>
+<body>
+    
+    <form action="http://localhost:2000/insert" method="post" id="myForm">
+        <h1>Details</h1>
+        <i class="fa-solid fa-bus"></i>
+        <input type="text" name="bus_no" id="bus_no" placeholder="Bus Number">
+        
+        <i class="fa-solid fa-bus" id="first"></i>
+        <input type="text" name="brand" id="brand" placeholder="Brand">
+        
+        <i class="fa-solid fa-bus" id="first"></i>
+        <input type="text" name="model" id="model" placeholder="Model">
+        
+        <i class="fa-solid fa-bus" id=""></i>
+        <input type="text" name="eng_type" id="eng_type" placeholder="Engine Type"> 
+        <i class="fa-solid fa-bus" id=""></i>
+        <input type="date" name="service_date" id="service_date" placeholder="service date"> 
+        <div class="error-message" id="error-message"></div>
+        <button type="submit" onclick="validateForm">Submit</button>
+        <button type="view details" onclick="validateForm"><a href="display.html"  style="text-decoration: none; color: white;">View Details</a></button>
+    </form>
+    <script>
+        function validateForm() {
+          var bus_no = document.getElementById('bus_no').value;
+          var brand = document.getElementById('brand').value;
+          var model = document.getElementById('model').value;
+          var eng_type = document.getElementById('eng_type').value;
+          var service_date = document.getElementById('service_date').value;
+          var errorMessage = document.getElementById('error-message');
+    
+          if (bus_no === '' || brand === '' || model === ''|| eng_type === ''||service_date === '') {
+            errorMessage.textContent = 'All fields are required';
+          } else {
+            // Perform additional validation if needed
+    
+            // If everything is valid, submit the form (you can replace this with your own logic)
+            alert('Form submitted successfully!');
+            // Clear the form
+            document.getElementById('myForm').reset();
+            errorMessage.textContent = '';
+          }
+        }
+      </script>
+    
+</body>
+</html>

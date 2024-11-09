@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ecss.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        body {
+          background-image: url(white.avif);
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-attachment: fixed;  
+          background-size: cover;
+        }
+        .card {
+            width: 900px;
+            height: 900%;
+            border: 2px solid black;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-image: url(light.jpg);
+        }
+
+            .card img {
+                width: 100%;
+                border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .form-box{
+            background-image: url(assth.jpg);
+            border: 2px solid black;
+            border-radius: 5%;
+        }
+        </style>
+</head>
+<body>
+    
+    <div class="form-box">
+        <br> 
+        <br><br><br><br>  
+    <h1> ENTER THE BUS NUMBER</h1>
+    <br>
+    <br>
+    <input type="search" name="bus_no" id="search" class="btn" style="background-color: white; width: 55%; border-color: black;">
+    <button onclick="search()" class="btn" style="background-color:darkcyan; border-color: black;">Search</button>
+<br><br><br><br><br>
+    <div class="card" style="width: 20rem;">
+        <div class="card-body" id="card">
+      
+         
+        </div>
+      </div>
+    </div>
+
+
+</body>
+
+<script>
+    
+    function search()
+    {
+        var bus_no = document.getElementById("search").value;
+        
+    
+      
+
+        fetch(`http://localhost:2000/${bus_no}`,{method:"get"})
+        .then(data=>data.json())
+        .then((data)=>{
+            var currentDate;
+            var temp = ''
+            data.map((item)=>{
+                temp += `
+                <h5 class="card-title">${item.bus_no}</h5>
+                <p class="card-text">${item.brand}</p>
+                <p class="card-text">${item.model}</p>
+                <p class="card-text">${item.eng_type}</p>
+                <p class="card-text">${item.service_date}</p>
+                <p class="card-text" id="upd"></p>
+                
+                `
+                currentDate = item.service_date;
+            })
+
+            document.getElementById("card").innerHTML=temp;
+            const nextServiceDate = calculateNextServiceDate(currentDate);
+            console.log("Next service date:", nextServiceDate);
+            document.getElementById("upd").innerHTML=nextServiceDate;
+        })
+        
+    }
+    function calculateNextServiceDate(service_date) {
+        const updated_service_date = new Date(service_date);
+        updated_service_date.setMonth(updated_service_date.getMonth() + 6);
+        return updated_service_date.toISOString().split('T')[0];
+        }
+        const currentDate = new Date().toISOString().split('T')[0]; // Get current date in ISO format (YYYY-MM-DD)
+const nextServiceDate = calculateNextServiceDate(currentDate);
+console.log("Next service date:", nextServiceDate);
+// document.getElementById("upd").innerHTML=nextServiceDate;
+
+</script>
+</html>
